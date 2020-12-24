@@ -1,11 +1,3 @@
-/*======================================================================================
-Written by...: Esin Sari & Rebekah Salsburg
-Date........ : 7 / 25 / 2020
-Assignment.. : HW4
-Purpose..... : Compiler
-Work done... : Windows Machine
-======================================================================================== */
-
 #include "headers.h"
 
 void flagInfo();
@@ -19,14 +11,11 @@ int main(int argc, char *argv[])
     FILE *out = fopen("allOutput.txt", "w");
     FILE *screenOut = fopen("screenOutput.txt", "w");
 
-    // argc == number of command line arguments
-    // argc will always equal 2 if user typed ./compile <filename>.txt
     if (argc < 2) //
         flagInfo();
 
     strcpy(filename, argv[1]);
 
-    // ensure the second argument is a text file
     int len = strlen(filename);
     if (filename[len - 1] != 't' && filename[len - 2] != 'x' && filename[len - 3] != 't')
         flagInfo();
@@ -54,8 +43,6 @@ int main(int argc, char *argv[])
         }
         argc--;
     }
-
-    // call the functions
 
     char *lexOutput = lexAnalyzer(filename);
     char *parserOutput = parser();
