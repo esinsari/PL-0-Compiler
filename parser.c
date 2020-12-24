@@ -1,18 +1,3 @@
-/*======================================================================================
-Written by...: Esin Sari & Rebekah Salsburg
-Date........ : 7 / 25 / 2020
-Assignment.. : HW4
-Purpose..... : Parser
-Work done... : Windows Machine
-======================================================================================== */
-
-// ICG: https://codeshare.io/5XxlVn
-// PARSER: https://codeshare.io/G617pp
-// VM: https://codeshare.io/29W7E1
-// LEX: https://codeshare.io/G77LRb
-// HEADERS: https://codeshare.io/5Xg4Dj
-// COMPILER DRIVER: https://codeshare.io/G8ldQE
-
 #include "headers.h"
 
 typedef struct
