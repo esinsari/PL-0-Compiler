@@ -1,14 +1,5 @@
-/*======================================================================================
-Written by...: Esin Sari & Rebekah Salsburg
-Date........ : 7 / 25 / 2020
-Assignment.. : HW4
-Purpose..... : Virtual Machine
-Work done... : Windows Machine
-======================================================================================== */
-
 #include "headers.h"
 
-// define constant values
 #define MAX_DATA_STACK_HEIGHT 1000
 #define EMPTY_STACK INT_MIN
 #define FULL_STACK INT_MAX
@@ -58,12 +49,11 @@ char *vm(char *filename)
         AR[i] = -1;
     }
 
-    //Open files in.txt&out.txt for reading and writing purpose
     inputfile = fopen("ICGOutput.txt", "r");
     output = fopen("vmOutput.txt", "w");
     rewind(inputfile);
 
-    if (inputfile == NULL || output == NULL) // check for file failure
+    if (inputfile == NULL || output == NULL)
     {
         printf("ERROR: File could not be opened.");
         sprintf(vmTemp, "ERROR: File could not be opened.");
@@ -84,7 +74,6 @@ char *vm(char *filename)
     sprintf(vmTemp, "Line \tOP \tL \tM\n");
     strcat(vmOutput, vmTemp);
 
-    // put all instructions in the inst array
     while (fscanf(inputfile, "%d %d %d", &inst[line].op, &inst[line].l, &inst[line].m) != EOF)
     {
         inst[line].line = line;
@@ -106,7 +95,6 @@ char *vm(char *filename)
     sprintf(vmTemp, "\n\nInitial values: \t\t\t%1d \t%1d \t%1d\n", PC, BP, SP);
     strcat(vmOutput, vmTemp);
 
-    // line is the # lines in the whole file
     do
     {
         nextPC = PC + 1;
