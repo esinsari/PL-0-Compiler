@@ -59,7 +59,7 @@
 
  Recursive Descent Parser:
 	--> Read inputs from Scanner (HW2) and parses the lexemes
-        --> Symbol Table is created
+       	--> Symbol Table is created
 	--> Outputs generated error messages if not syntactically correct
  
  Intermediate Code Generator:
