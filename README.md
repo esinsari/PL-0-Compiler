@@ -46,7 +46,7 @@
 		    
  Purpose:
 	Implementing compiler for tiny PL/O machine
-	--> Lexical Anayzer 
+        --> Lexical Anayzer 
 	--> Recursice Descent Parser
 	--> Intermediate Code Generator
 	--> Virtual Machine
