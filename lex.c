@@ -1,14 +1,5 @@
-/*======================================================================================
-Written by...: Esin Sari & Rebekah Salsburg
-Date........ : 7 / 25 / 2020
-Assignment.. : HW4
-Purpose..... : Lexical Analyzer
-Work done... : Windows Machine
-======================================================================================== */
-
 #include "headers.h"
 
-// define constant values
 #define NORW 14   // number of reserved words
 #define NUMSYM 12 // number of valid symbols
 
@@ -34,7 +25,6 @@ typedef struct lexemeTable
 char lexTemp[MAX_CODE_LENGTH] = "";
 char lexOutput[10000] = "";
 
-// Declaration of Functions
 void displayLexeme(lexemeTable lexemes[], int codeLength, FILE *outputfile);
 void displaySourceCode(char sourceCode[], int codeLength, FILE *outputfile);
 void errorMessage(FILE *inputfile, FILE *outputfile, char *message);
@@ -84,7 +74,6 @@ char *lexAnalyzer(char *filename)
     char digitTemp[MAX_CODE_LENGTH] = "";   // current inspected digit during loop
     char currentWord[MAX_CODE_LENGTH] = ""; // holds current inspected word during loop
 
-    // FILE *inputfile = fopen(filename, "r");
     FILE *inputfile = fopen(filename, "r");
     FILE *outputfile = fopen("lexAnalyzerOutput.txt", "w");
 
@@ -104,7 +93,7 @@ char *lexAnalyzer(char *filename)
 
     rewind(inputfile);
 
-    // put source code into sourceCode var
+
     while (fscanf(inputfile, "%c", &ch) != EOF)
     {
         sourceCode[codeLength++] = ch;
@@ -129,7 +118,7 @@ char *lexAnalyzer(char *filename)
             index++;
             continue;
         }
-        else if (ispunct(sourceCode[index])) // char is a symbol
+        else if (ispunct(sourceCode[index]))
         {
             commentIndex = isComment(sourceCode, index, codeLength); // check denoting a comment
 
@@ -148,9 +137,8 @@ char *lexAnalyzer(char *filename)
                     symbolFound = 1;
 
                     // store the current symbol
-                    lexemes[lexemeCount].lexeme[0] = sourceCode[index]; // since they're both single chars, no need for strcpy
+                    lexemes[lexemeCount].lexeme[0] = sourceCode[index];
 
-                    // determine if a combo symbol <>, !=, <=, >=, :=
                     if ((index + 1) < codeLength && ispunct(sourceCode[index + 1]))
                     {
                         switch (sourceCode[index])
@@ -201,10 +189,10 @@ char *lexAnalyzer(char *filename)
                             else
                                 errorMessage(inputfile, outputfile, "Symbol does not exist");
                             break;
-                        default: // give it the symbol's token type if it isn't a possible combo symbol
+                        default: 
                             lexemes[lexemeCount].tokenType = ssym[i].token;
                             break;
-                        } // end switch case
+                        } 
                     }
                     else // this is the last char of the code or the next char is not a symbol
                     {
@@ -219,7 +207,7 @@ char *lexAnalyzer(char *filename)
                 }
             }
 
-            if (!symbolFound) // not a valid symbol
+            if (!symbolFound) 
                 errorMessage(inputfile, outputfile, "Symbol does not exist");
         }
         else if (isalpha(sourceCode[index])) // first char is a LETTER
@@ -355,14 +343,14 @@ void displayLexeme(lexemeTable lexemes[], int lexemeCount, FILE *outputfile)
         fprintf(outputfile, "%d ", lexemes[i].tokenType);
         fprintf(out, "%d ", lexemes[i].tokenType);
 
-        if (lexemes[i].tokenType == identsym) // print the identifier
+        if (lexemes[i].tokenType == identsym) 
         {
             sprintf(lexTemp, "%s ", lexemes[i].lexeme);
             strcat(lexOutput, lexTemp);
             fprintf(outputfile, "%s ", lexemes[i].lexeme);
             fprintf(out, "%s ", lexemes[i].lexeme);
         }
-        if (lexemes[i].tokenType == numbersym) // print the constant
+        if (lexemes[i].tokenType == numbersym) 
         {
             sprintf(lexTemp, "%d ", lexemes[i].numLex);
             strcat(lexOutput, lexTemp);
@@ -383,7 +371,7 @@ int isComment(char sourceCode[], int i, int codeLength)
     if (sourceCode[i] != '/')
         return -1;
     else                                                       // detect start of a comment
-        if ((i + 1) >= codeLength || sourceCode[i + 1] != '*') // we have a sequence of  /something not /*, or this is the last char in the code
+        if ((i + 1) >= codeLength || sourceCode[i + 1] != '*') 
         return -1;
     else // a comment started
         for (i = i + 2; i < codeLength; i++)
